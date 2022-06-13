@@ -1,32 +1,22 @@
 package tictactoe;
 
-import javax.swing.plaf.nimbus.State;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Field {
     private char[][] field;
-    private String initial;
     private States state;
     private int numOfMoves = 0;
 
     // winning positions
     private int[][] winCondArr = {{0,1,2}, {3,4,5}, {6,7,8}, {0,3,6}, {1,4,7}, {2,5,8}, {0,4,8}, {2,4,6}};
 
-    public Field(String init) {
-        this.initial = init;
+    public Field() {
         this.field = new char[3][3];
         this.state = States.GAMENOTFINISHED;
-        int current1dIndex = 0;
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field.length; j++) {
-                if (init.charAt(current1dIndex) == '_') {
-                    field[i][j] = ' ';
-                } else {
-                    field[i][j] = init.charAt(current1dIndex);
-                    this.numOfMoves++;
-                }
-                current1dIndex++;
+                field[i][j] = ' ';
             }
         }
         checkField('X');
@@ -45,7 +35,7 @@ public class Field {
         }
         System.out.print("---------");
     }
-
+    /* for Stage 0
     public char determineStarter() {
         int counterX = 0;
         int counterO = 0;
@@ -57,6 +47,11 @@ public class Field {
             }
         }
         return counterX > counterO ? 'O' : 'X';
+    }
+     */
+
+    public States getState() {
+        return state;
     }
 
     public void updateField(int x, int y, char symbol) {
@@ -80,6 +75,7 @@ public class Field {
         return numOfMoves;
     }
 
+    // getting user input
     public void makeMove() {
         Scanner scan = new Scanner(System.in);
         boolean isRead;
@@ -95,10 +91,12 @@ public class Field {
                     System.out.println("This cell is occupied! Choose another one!");
                     isRead = false;
                 } else {
-                    updateField(inX, inY, determineStarter());
+                    updateField(inX, inY, 'X');
                     printField();
                     checkField('X');
-                    checkField('O');
+                    /* not needed because after X makes a move only X can
+                       have a chance of winning */
+                    // checkField('O');
                     System.out.println();
                     printState();
                 }
@@ -112,10 +110,11 @@ public class Field {
                 isRead = false;
                 System.out.println("Coordinates should be from 1 to 3!");
             }
-        } while (!isRead || state == States.GAMENOTFINISHED);
+        } while (!isRead); // || state == States.GAMENOTFINISHED - only for Stage 1
     }
 
-    private void checkField(char content) {
+    // checking for winner
+    public void checkField(char content) {
         // 2d field to 1d
         int[] currFieldIn1D = new int[field.length * field[0].length];
         int index1D = 0;

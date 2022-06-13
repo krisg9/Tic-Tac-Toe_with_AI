@@ -5,11 +5,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Enter the cells: ");
-        String input = scan.next();
-        Field field = new Field(input);
+        Field field = new Field();
         field.printField();
-        field.makeMove();
+        Computer cp = new Computer(); // computer oponent
+        int counter = 0;
+        do {
+            if (counter % 2 == 0) {
+                field.makeMove();
+            } else {
+                cp.makeMove(field);
+            }
+            counter++;
+        } while (field.getState() == States.GAMENOTFINISHED);
     }
 }
