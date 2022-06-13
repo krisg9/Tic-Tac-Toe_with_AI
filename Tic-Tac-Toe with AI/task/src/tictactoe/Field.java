@@ -98,7 +98,7 @@ public class Field {
                        have a chance of winning */
                     // checkField('O');
                     System.out.println();
-                    printState();
+                    // printState(); - print stage only in Stage 0
                 }
             } catch (InputMismatchException ime) {
                 // clears buffer
@@ -111,6 +111,10 @@ public class Field {
                 System.out.println("Coordinates should be from 1 to 3!");
             }
         } while (!isRead); // || state == States.GAMENOTFINISHED - only for Stage 1
+        if (state == States.DRAW || state == States.O_WINS || state == States.X_WINS) {
+            printField();
+            printState();
+        }
     }
 
     // checking for winner
