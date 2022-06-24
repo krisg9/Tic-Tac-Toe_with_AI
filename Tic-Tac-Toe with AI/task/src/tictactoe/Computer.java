@@ -1,7 +1,7 @@
 package tictactoe;
 
 public class Computer {
-    private final char SYMBOL = 'O';
+    private char SYMBOL = 'O';
 
     public void makeMove(Field field) {
         int x;
