@@ -1,6 +1,19 @@
 package tictactoe;
 
-public class HumanPlayer {
-    private char SYMBOL = 'X';
-    // TODO: 13.06.22   make a player class to execute moves on field
+public class HumanPlayer implements Player {
+    private char symbol;
+    private Field field;
+
+    public HumanPlayer(Field field) {
+        this.field = field;
+    }
+
+    // human player calls make move which is already implemented in field
+    public void makeMove() {
+       field.makeMove();
+    }
+
+    public void setSymbol(char symbol) {
+        this.symbol = symbol;
+    }
 }

@@ -11,8 +11,6 @@ public class Field {
     // winning positions
     private int[][] winCondArr = {{0,1,2}, {3,4,5}, {6,7,8}, {0,3,6}, {1,4,7}, {2,5,8}, {0,4,8}, {2,4,6}};
 
-    // TODO: 13.06.22 make field class with methods so players can
-    // interact with it
     public Field() {
         this.field = new char[3][3];
         this.state = States.GAMENOTFINISHED;
@@ -114,7 +112,6 @@ public class Field {
             }
         } while (!isRead); // || state == States.GAMENOTFINISHED - only for Stage 1
         if (state == States.DRAW || state == States.O_WINS || state == States.X_WINS) {
-            printField();
             printState();
         }
     }
