@@ -1,7 +1,4 @@
 package tictactoe;
-
-import java.awt.geom.AffineTransform;
-import java.security.cert.CertificateParsingException;
 import java.util.Scanner;
 
 public class Main {
